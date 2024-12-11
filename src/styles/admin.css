@@ -1,0 +1,37 @@
+.admin {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-family: "my-font", sans-serif;
+}
+
+.item {
+    margin: 20px;
+}
+
+input {
+    font-size: 16px;
+    padding: 8px;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+@font-face {
+    font-family: "my-font";
+    src: url("../fonts/futura-bold-italic.ttf");
+    font-weight: bold;
+    font-style: italic;
+}
+
+@media only screen and (max-width: 868px) {
+    .banner img {
+        width: 100%;
+    }
+    .content-body {
+        flex-direction: column;
+    }
+
+    .content-contract {
+        flex-direction: column;
+    }
+}
