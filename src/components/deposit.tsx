@@ -7,7 +7,6 @@ import { BN } from "@coral-xyz/anchor";
 import banner from "../images/banner.png";
 import line from "../images/line.png";
 import ponzi from "../images/ponzi.png";
-import Admin  from "./admin";
 
 import "../styles/deposit.css";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
@@ -114,7 +113,6 @@ export default function Deposit() {
 
   return (
     <div>
-      <Admin />
       <div className="banner">
         <img src={banner}/>
       </div>

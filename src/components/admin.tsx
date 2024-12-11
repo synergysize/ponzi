@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { program } from "../anchor/setup";
 import { BN } from "@coral-xyz/anchor";
@@ -16,7 +16,6 @@ export default function Admin() {
   const [owner, setOwnerAddress] = useState<string>("");
   const [doubleToken, setDoubleToken] = useState<string>("");
   const [initToken, setInitToken] = useState<string>("");
-  const [currentOwner, setOwner] = useState<string>("7SYTbmGDVwB8KqaUNPHwJeCfttyXagJUNdzPdtLv6sce");
 
   const handleDepositAmount = (e: any) => {
     setMaxAmount(Number(e.target.value));
@@ -338,103 +337,68 @@ export default function Admin() {
     }
   }
 
-  useEffect(() => {
-    const getInitData = async() => {
-      try {
-        const [globalState] = await PublicKey.findProgramAddress(
-          [
-            Buffer.from("GLOBAL_STATE_SEED")
-          ],
-          program.programId
-        );
-        const globalStateData = await program.account.globalState.fetch(globalState);
-        const owner = globalStateData.owner;
-        setOwner(owner.toBase58());
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    getInitData()
-  }, [])
   return (
     <div className="admin">
-      {(currentOwner == publicKey?.toBase58()) &&
-        <div className="item">
-            <button
-              className="w-24"
-              onClick={handleInit}
-              disabled={!publicKey}
-            >
-              Initialize the contract
-            </button>
-            <input type="text" onChange={(e) => handleInitTokenAddress(e)} placeholder="Token Mint Address"/>
-        </div>
-      }
-       {(currentOwner == publicKey?.toBase58())  &&
-        <div className="item">
+      <div className="item">
           <button
             className="w-24"
-            onClick={handleMaxAmount}
+            onClick={handleInit}
             disabled={!publicKey}
           >
-            Set Max Amount
+            Initialize the contract
           </button>
-          <input type="number" min={0} onChange={(e) => handleDepositAmount(e)} placeholder="Max Amount"/>
-        </div>
-      }
-
-       {(currentOwner == publicKey?.toBase58())  &&
-        <div className="item">
-          <button
-            className="w-24"
-            onClick={handleTransferOwnerShip}
-            disabled={!publicKey}
-          >
-            Transfer Ownership
-          </button>
-          <input type="text" onChange={(e) => setOwnerAddress(e.target.value)} placeholder="Transfer Ownership"/>
-        </div>
-      }
-
-       {(currentOwner == publicKey?.toBase58())  &&
-        <div className="item">
-          <button
-            className="w-24"
-            onClick={handleWithdrawToken}
-            disabled={!publicKey}
-          >
-            Withdraw
-          </button>
-          <input type="number" min={0} onChange={(e) => handleWithdrawAmount(e)} placeholder="Withdraw Amount"/>
-        </div>
-      }
-
-       {(currentOwner == publicKey?.toBase58())  &&
-        <div className="item">
-          <button
-            className="w-24"
-            onClick={handleDoubleToken}
-            disabled={!publicKey}
-          >
-            Set CA
-          </button>
-          <input type="text" onChange={(e) => handleDoubleTokenAddress(e)} placeholder="Token Mint Address"/>
-        </div>
-      }
-
-       {(currentOwner == publicKey?.toBase58())  &&
-        <div className="item">
-          <button
-            className="w-24"
-            onClick={handlePonzify}
-            disabled={!publicKey}
-          >
-            Toggle Ponzify
-          </button>
-        </div>
-      }
-
-       {(currentOwner == publicKey?.toBase58())  &&<ContractState />}
+          <input type="text" onChange={(e) => handleInitTokenAddress(e)} placeholder="Token Mint Address"/>
+      </div>
+      <div className="item">
+        <button
+          className="w-24"
+          onClick={handleMaxAmount}
+          disabled={!publicKey}
+        >
+          Set Max Amount
+        </button>
+        <input type="number" min={0} onChange={(e) => handleDepositAmount(e)} placeholder="Max Amount"/>
+      </div>
+      <div className="item">
+        <button
+          className="w-24"
+          onClick={handleTransferOwnerShip}
+          disabled={!publicKey}
+        >
+          Transfer Ownership
+        </button>
+        <input type="text" onChange={(e) => setOwnerAddress(e.target.value)} placeholder="Transfer Ownership"/>
+      </div>
+      <div className="item">
+        <button
+          className="w-24"
+          onClick={handleWithdrawToken}
+          disabled={!publicKey}
+        >
+          Withdraw
+        </button>
+        <input type="number" min={0} onChange={(e) => handleWithdrawAmount(e)} placeholder="Withdraw Amount"/>
+      </div>
+      <div className="item">
+        <button
+          className="w-24"
+          onClick={handleDoubleToken}
+          disabled={!publicKey}
+        >
+          Set CA
+        </button>
+        <input type="text" onChange={(e) => handleDoubleTokenAddress(e)} placeholder="Token Mint Address"/>
+      </div>
+      <div className="item">
+        <button
+          className="w-24"
+          onClick={handlePonzify}
+          disabled={!publicKey}
+        >
+          Toggle Ponzify
+        </button>
+      </div>
+      <ContractState />
     </div>
   );
 }
