@@ -17,7 +17,6 @@ export default function Admin() {
   const [doubleToken, setDoubleToken] = useState<string>("");
   const [initToken, setInitToken] = useState<string>("");
   const [currentOwner, setOwner] = useState<string>("7SYTbmGDVwB8KqaUNPHwJeCfttyXagJUNdzPdtLv6sce");
-  const [flag, setFlag] = useState<boolean>(true);
 
   const handleDepositAmount = (e: any) => {
     setMaxAmount(Number(e.target.value));
@@ -353,7 +352,6 @@ export default function Admin() {
         setOwner(owner.toBase58());
       } catch (error) {
         console.log(error);
-        setFlag(false);
       }
     }
     getInitData()
