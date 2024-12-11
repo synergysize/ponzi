@@ -16,7 +16,7 @@ export default function Admin() {
   const [owner, setOwnerAddress] = useState<string>("");
   const [doubleToken, setDoubleToken] = useState<string>("");
   const [initToken, setInitToken] = useState<string>("");
-  const [currentOwner, setOwner] = useState<PublicKey>();
+  const [currentOwner, setOwner] = useState<string>("7SYTbmGDVwB8KqaUNPHwJeCfttyXagJUNdzPdtLv6sce");
   const [flag, setFlag] = useState<boolean>(true);
 
   const handleDepositAmount = (e: any) => {
@@ -350,7 +350,7 @@ export default function Admin() {
         );
         const globalStateData = await program.account.globalState.fetch(globalState);
         const owner = globalStateData.owner;
-        setOwner(owner);
+        setOwner(owner.toBase58());
       } catch (error) {
         console.log(error);
         setFlag(false);
@@ -360,7 +360,7 @@ export default function Admin() {
   }, [])
   return (
     <div className="admin">
-      {(currentOwner?.toBase58() == publicKey?.toBase58() || !flag) &&
+      {(currentOwner == publicKey?.toBase58()) &&
         <div className="item">
             <button
               className="w-24"
@@ -372,7 +372,7 @@ export default function Admin() {
             <input type="text" onChange={(e) => handleInitTokenAddress(e)} placeholder="Token Mint Address"/>
         </div>
       }
-       {(currentOwner?.toBase58() == publicKey?.toBase58() || !flag) &&
+       {(currentOwner == publicKey?.toBase58())  &&
         <div className="item">
           <button
             className="w-24"
@@ -385,7 +385,7 @@ export default function Admin() {
         </div>
       }
 
-       {(currentOwner?.toBase58() == publicKey?.toBase58() || !flag) &&
+       {(currentOwner == publicKey?.toBase58())  &&
         <div className="item">
           <button
             className="w-24"
@@ -398,7 +398,7 @@ export default function Admin() {
         </div>
       }
 
-       {(currentOwner?.toBase58() == publicKey?.toBase58() || !flag) &&
+       {(currentOwner == publicKey?.toBase58())  &&
         <div className="item">
           <button
             className="w-24"
@@ -411,7 +411,7 @@ export default function Admin() {
         </div>
       }
 
-       {(currentOwner?.toBase58() == publicKey?.toBase58() || !flag) &&
+       {(currentOwner == publicKey?.toBase58())  &&
         <div className="item">
           <button
             className="w-24"
@@ -424,7 +424,7 @@ export default function Admin() {
         </div>
       }
 
-       {(currentOwner?.toBase58() == publicKey?.toBase58() || !flag) &&
+       {(currentOwner == publicKey?.toBase58())  &&
         <div className="item">
           <button
             className="w-24"
@@ -436,7 +436,7 @@ export default function Admin() {
         </div>
       }
 
-       {(currentOwner?.toBase58() == publicKey?.toBase58() || !flag) &&<ContractState />}
+       {(currentOwner == publicKey?.toBase58())  &&<ContractState />}
     </div>
   );
 }
