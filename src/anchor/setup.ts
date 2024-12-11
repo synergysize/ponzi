@@ -1,6 +1,6 @@
 import { IdlAccounts, Program } from "@coral-xyz/anchor";
 import { IDL, DoubleSystem } from "./idl";
-import { clusterApiUrl, Connection, PublicKey } from "@solana/web3.js";
+import { Connection, PublicKey } from "@solana/web3.js";
 import * as buffer from "buffer";
 window.Buffer = buffer.Buffer;
 
