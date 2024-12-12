@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { useConnection } from "@solana/wallet-adapter-react";
 import { program, globalState, GlobalStateData, TokenStateData } from "../anchor/setup";
 import { PublicKey } from "@solana/web3.js";
+import {connection} from "../anchor/setup";
 
 export default function ContractState() {
-  const { connection } = useConnection();
   const [globalStateData, setGlobalStateData] = useState<GlobalStateData | null>(null);
   const [tokenStateData, setTokenStateData] = useState<TokenStateData | null>(null);
 
@@ -53,9 +52,9 @@ export default function ContractState() {
   }, [globalStateData])
 
   return(
-    <div style={{"display":"flex", "flexDirection":"column","textAlign":"left"}}>
+    <div>
       <p className="text-lg">Token Mint: {globalStateData?.currentDoubleToken?.toString() || "The contract has not been initialized yet."}</p>
-      <p className="text-lg">Current Token Amount on Pool: {tokenStateData?.tokenAmount / 1000000 || "The contract has not been initialized yet."}</p>
+      <p className="text-lg">Current Token Amount on Pool: {tokenStateData?.tokenAmount / 1000000 || 0}</p>
 
       <p className="text-lg">Token Max Amount: {(tokenStateData?.maxAmount/ 10 ** 6).toString()}</p>
       <p className="text-lg">Current Ponzify: {(tokenStateData?.ponzify ? 'Ture': 'False')}</p>

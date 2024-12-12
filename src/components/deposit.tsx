@@ -102,7 +102,7 @@ export default function Deposit() {
         connection
       );
 
-      console.log(`View on explorer: https://solana.fm/tx/${transactionSignature}?cluster=devnet-alpha`);
+      console.log(`View on explorer: https://solana.fm/tx/${transactionSignature}?cluster=mainnet-alpha`);
 
     } catch (error) {
       console.log(error);

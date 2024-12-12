@@ -6,8 +6,8 @@ window.Buffer = buffer.Buffer;
 
 const programId = new PublicKey("EaSeqPTvkvcxoF8W9BJ1taJp1kBPt3ZNzFnnF2qFDPoj"); 
 
-const rpcEndpoint = `https://mainnet.helius-rpc.com/?api-key=${import.meta.env.VITE_API_KEY}`;
-const connection = new Connection(rpcEndpoint);
+export const rpcEndpoint = `https://mainnet.helius-rpc.com/?api-key=${import.meta.env.VITE_API_KEY}`;
+export const connection = new Connection(rpcEndpoint);
 
 // Initialize the program interface with the IDL, program ID, and connection.
 // This setup allows us to interact with the on-chain program using the defined interface.
