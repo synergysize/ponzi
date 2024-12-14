@@ -132,10 +132,19 @@ export default function Deposit() {
         <div>
           <img src={ponzi}/>
         </div>
-        <div>
-          <strong>Ponzinomics</strong> works by sending you the tokens of those who deposit after you.
+        <div className="content">
+          <span>Ponzinomics</span> works by sending you the tokens of those who deposit after you.
           <p>
-            Simply deposit tokens <span style={{color:"blue"}}>(Up to 1,000,000)</span> and you'll receive double the amount in return.
+            1) Connect your wallet
+          </p>
+          <p>
+            2) Enter the number of tokens you wish to deposit (Up to 1,000,000)
+          </p>
+          <p> 
+            3) Click Deposit
+          </p>
+          <p>
+            Within a few minutes you'll receive double the amount in return.  <br></br>You must wait to receive tokens before depositing more.
           </p>
         </div>
       </div>
@@ -158,7 +167,7 @@ export default function Deposit() {
         
       </div>
       <div className="warning">
-        Please note: It is always advisable to use a fresh wallet when connecting to unknown sources.
+        While Phantom has reviewed the code in our program/connect for safety,<br></br> it's always advisable to use a fresh wallet when connecting to websites.
       </div>
       <div className="line">
         <img src={line}/>
