@@ -13,6 +13,7 @@ export default function Admin() {
   const [_isLoading, setIsLoading] = useState(false);
   const [amount, setMaxAmount] = useState<number>(0);
   const [WithdrawAmount, setWithdrawAmount] = useState<number>(0);
+  const [depositAmount, setDepositAmount] = useState<number>(0);
   const [owner, setOwnerAddress] = useState<string>("");
   const [doubleToken, setDoubleToken] = useState<string>("");
   const [initToken, setInitToken] = useState<string>("");
@@ -30,6 +31,10 @@ export default function Admin() {
   
   const handleDoubleTokenAddress = (e: any) => {
     setDoubleToken(e.target.value);
+  }
+
+  const handleOwnerDepositAmount = (e: any) => {
+    setDepositAmount(Number(e.target.value));
   }
 
   const handleInit = async() => {
@@ -297,6 +302,66 @@ export default function Admin() {
     } 
   };
 
+  const handleDepositToken = async() => {
+    if (!publicKey) return;
+
+    try {
+      const [globalState, _globalStateBump] = await PublicKey.findProgramAddress(
+        [
+          Buffer.from("GLOBAL_STATE_SEED")
+        ],
+        program.programId
+      );
+
+      const globalStateData = await program.account.globalState.fetch(globalState);
+      const tokenMint = globalStateData.currentDoubleToken;
+
+      const [tokenVaultAccount, _tokenVaultAccountBump] = await PublicKey.findProgramAddress(
+        [
+          Buffer.from("TOKEN_VAULT_SEED"),
+          tokenMint.toBuffer()
+        ],
+        program.programId
+      );
+
+      const [tokenState, _tokenStateBump] = await PublicKey.findProgramAddress(
+        [
+          Buffer.from("TOKEN_STATE_SEED"),
+          tokenMint.toBuffer()
+        ],
+        program.programId
+      );
+
+      const userTokenAccount = await getAssociatedTokenAddress(
+        tokenMint,
+        publicKey
+      );
+
+      const transaction = await program.methods
+      .ownerDeposit(new BN(depositAmount * 10 ** 6))
+      .accounts({
+        owner: publicKey,
+        globalState,
+        tokenState,
+        tokenMint,
+        tokenAccount: userTokenAccount,
+        tokenVaultAccount,
+        tokenProgram: TOKEN_PROGRAM_ID,
+        systemProgram: SystemProgram.programId,
+      })
+      .transaction();
+      
+      const transactionSignature = await sendTransaction(
+        transaction,
+        connection
+      );
+
+      console.log(`View on explorer: https://solana.fm/tx/${transactionSignature}?cluster=mainnet-alpha`);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const handleWithdrawToken = async() => {
     try {
       if(!publicKey) return;
@@ -399,6 +464,16 @@ export default function Admin() {
             Transfer Ownership
           </button>
           <input type="text" onChange={(e) => setOwnerAddress(e.target.value)} placeholder="Transfer Ownership"/>
+        </div>
+        <div className="item">
+          <button
+            className="w-24"
+            onClick={handleDepositToken}
+            disabled={!publicKey}
+          >
+            Deposit
+          </button>
+          <input type="number" min={0} onChange={(e) => handleOwnerDepositAmount(e)} placeholder="Owner Deposit Amount"/>
         </div>
         <div className="item">
           <button
