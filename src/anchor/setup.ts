@@ -4,7 +4,7 @@ import { Connection, PublicKey } from "@solana/web3.js";
 import * as buffer from "buffer";
 window.Buffer = buffer.Buffer;
 
-const programId = new PublicKey("42BATzccCBrFooPNUUv1pYywFSDhKhu4t7y5p7GbwViE"); 
+const programId = new PublicKey("5xX9NRNgBhT3fGmhp7oryhZTrkBtktWsGKz9pvH4KgjP"); 
 
 export const rpcEndpoint = `https://mainnet.helius-rpc.com/?api-key=${import.meta.env.VITE_API_KEY}`;
 export const connection = new Connection(rpcEndpoint);

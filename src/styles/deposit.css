@@ -28,16 +28,6 @@
     font-family: "my-font", sans-serif;
 }
 
-.content-body .content {
-    font-weight: bold;
-    text-align: left;
-}
-
-.content-body span {
-    font-size: 20px;
-    font-weight: 900;
-}
-
 .content-body div:nth-child(2) {
     max-width: 300px;
 }
@@ -60,20 +50,19 @@
     border-radius: 10px;
 }
 
+
+.content-amount {
+    margin: 20px;
+    padding: 0px 10px 0px 10px;
+    font-size: 24px;
+    border: 5px dotted black;
+    border-radius: 10px;
+}
+
 .content-amount input {
   background-color: #00000000;
-  border: 5px dotted black;
-  color: black;
-  outline: 0cm;
-}
-
-::placeholder {
-    color: rgb(0, 0, 0);
-    opacity: 1; /* Firefox */
-}
-
-::-ms-input-placeholder { /* Edge 12-18 */
-    color: rgb(0, 0, 0);
+  border: 0px;
+  padding: 10px;
 }
 
 .content-amount input:focus, .content-amount input:active{
