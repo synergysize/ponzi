@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { program } from "../anchor/setup";
 import { getAssociatedTokenAddress, TOKEN_PROGRAM_ID } from "@solana/spl-token";
@@ -16,6 +16,7 @@ export default function Deposit() {
   const { connection } = useConnection();
   const [isLoading, setIsLoading] = useState(false);
   const [amount, setDepositAmount] = useState(0);
+  const tokenAddress = "HTvQtYWwtWnotBDj9vqEbsYDuTuJ16uhf2wULf9VPoNZ";
 
   const handleDepositAmount = (e: any) => {
     setDepositAmount(Number(e.target.value));
@@ -120,10 +121,9 @@ export default function Deposit() {
         <img src={line}/>
       </div>
       <div className="content-header">
-        <p>
-          <strong>Ponzinomics</strong> is a token doubling program launched on Solana as an homage to the legendary pioneer and visionary of finance, Charles Ponzi. Without his work, cryptocurrency wouldn’t exist. 
-          He is the Emperor of Early Entry, the Monarch of Market Momentum, and the Grandfather of Groundfloor Gains.
-        </p>
+       <p>
+        "I gave the people what they wanted. I gave them the dream".
+       </p>
       </div>
       <div className="line">
         <img src={line}/>
@@ -135,7 +135,7 @@ export default function Deposit() {
         <div>
           <strong>Ponzinomics</strong> works by sending you the tokens of those who deposit after you.
           <p>
-            Simply deposit tokens <span style={{color:"blue"}}>(Up to 1,000,000)</span> and you'll receive double the amount in return.
+            Simply deposit tokens <span style={{color:"blue"}}>(Up to 2,500,000)</span> and you'll receive double the amount in {tokenAddress}.
           </p>
         </div>
       </div>
@@ -144,27 +144,25 @@ export default function Deposit() {
         <div className="content-wallet">
           <WalletMultiButton />
         </div>
-        <div className="content-deposit">
-          <div
-            onClick={onClick}
-          >
-            {isLoading ? "Loading" : "Deposit"}
-          </div>
-        </div>
-
+        <button className="deposit-button" onClick={onClick}>
+          {isLoading?"Loading":"DEPOSIT"}
+        </button>
         <div className="content-amount">
           <input type="number" min={0} onChange={(e) => handleDepositAmount(e)} placeholder="# of Tokens"/>
         </div>
-        
       </div>
+
       <div className="warning">
         Please note: It is always advisable to use a fresh wallet when connecting to unknown sources.
       </div>
       <div className="line">
         <img src={line}/>
       </div>
-      <div className="bottom">
-        "I gave the people what they wanted. I gave them the dream".
+      <div className="content-bottom">
+        <div className="bottom">
+          <strong>Ponzinomics</strong> is a token doubling program launched on Solana as an homage to the legendary pioneer and visionary of finance, Charles Ponzi. Without his work, cryptocurrency wouldn’t exist. 
+          He is the Emperor of Early Entry, the Monarch of Market Momentum, and the Grandfather of Groundfloor Gains.
+        </div>
       </div>
       <div className="line" style={{marginBottom: "30px"}}>
         <img src={line}/>

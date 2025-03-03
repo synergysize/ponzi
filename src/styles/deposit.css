@@ -12,7 +12,7 @@
 }
 
 .content-header {
-    font-size: 16px; 
+    font-size: 24px; 
     line-height: 1.5; 
     text-align: center; 
     max-width: 600px; 
@@ -37,36 +37,55 @@
     justify-content: center;
     align-items: center;
     font-family: "my-font", sans-serif;
+    gap: 15px; /* Add spacing between elements */
 }
+
 .content-wallet {
-    padding: 20px
+    padding: 20px;
 }
 
 .content-deposit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 20px;
-    padding: 0px 10px 0px 10px;
-    font-size: 24px;
-    border: 5px dotted black;
-    border-radius: 10px;
+    padding: 10px;
 }
 
-
-.content-amount {
-    margin: 20px;
-    padding: 0px 10px 0px 10px;
-    font-size: 24px;
-    border: 5px dotted black;
-    border-radius: 10px;
+.content-deposit img {
+    width: 150px; /* Adjust width */
+    height: auto; /* Keep aspect ratio */
+    cursor: pointer;
 }
 
 .content-amount input {
-  background-color: #00000000;
-  border: 0px;
-  padding: 10px;
+    width: 200px;
+    height: 40px;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 8px;
+    border: 2px solid #000000;
+    padding: 5px;
+    background-color: #00000000;
 }
 
-.content-amount input:focus, .content-amount input:active{
-    background-color: #00000000;
+.deposit-button {
+    background: linear-gradient(to bottom, #0a4e26, #006400); /* Deep green gradient */
+    color: gold; 
+    font-size: 24px;
+    font-weight: bold;
+    border: 3px solid gold;
+    padding: 12px 24px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.deposit-button:hover {
+    background: linear-gradient(to bottom, #006400, #0a4e26);
+    transform: scale(1.05);
 }
 
 .wallet-adapter-button-trigger {
@@ -74,7 +93,7 @@
     background-color: #00000000 !important;
     font-family: "my-font", sans-serif !important;
     font-size: 24px !important;
-    border: 5px dotted black !important;
+    border: 2px solid black !important;
     border-radius: 10px !important;
 }
 
@@ -83,10 +102,17 @@
     color: red;
 }
 
+.content-bottom {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
 .bottom{
     font-family: "my-font", sans-serif !important;
-    font-size: 24px;
+    font-size: 16px;
 }
+
 @font-face {
     font-family: "my-font";
     src: url("../fonts/futura-bold-italic.ttf");
